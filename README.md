@@ -53,18 +53,18 @@ Add a screenshot or GIF to show what the app looks like (can be hosted on Imgur 
 ## 📁 Folder Structure 
 
 ### 🖥️ Frontend (`/client`)
-/components
-/pages
-/hooks
-/context
+-**/components**
+-**/pages**
+-**/hooks**
+-**/context**
 
 
 ### 🌐 Backend (`/server`)
-/controllers
-/models
-/routes
-/middleware
-/config
+-**/controllers**
+-**/models**
+-**/routes**
+-**/middleware**
+-**/config**
 
 
 
