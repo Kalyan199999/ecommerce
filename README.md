@@ -1,4 +1,4 @@
-# 🚀 Project Name
+# 🚀 Ecommerce full stack
 
 A brief description of what your project does and why it’s useful.
 
