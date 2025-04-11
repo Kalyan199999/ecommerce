@@ -7,7 +7,7 @@ const { addNewProduct , getProducts, getProductById, deleteProduct  } = require(
 
 const router = express.Router();
 
-router.post('/post',verifyAdmin, upload.array('images',5) , addNewProduct)
+router.post('/post', verifyAdmin, upload.array('images',5) , addNewProduct)
 
 router.get('/', getProducts);
 

@@ -8,12 +8,14 @@ import Dashboard from './pages/Dashboard';
 import Navbar from './components/Navbar';
 import Login from './pages/Login';
 import Register from './pages/Register';
+import AddProduct from './pages/AddProduct'
 
 function App() {
   return (
     <Router>
 
       <Navbar />
+      
       <ToastContainer position="top-right" autoClose={3000} hideProgressBar />
 
       <Routes>
@@ -25,6 +27,12 @@ function App() {
         <Route path="/login" element={<Login />} />
 
         <Route path="/register" element={<Register />} />
+        
+        <Route path="/orders" element={<h1>Orders</h1>} />
+
+        <Route path="/add-product" element={<AddProduct />} />
+
+        <Route path="/*" element={<h1 className='text-center text-red-500 text-3xl font-bold'>Error</h1>} />
         
       </Routes>
 
