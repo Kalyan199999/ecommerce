@@ -40,7 +40,7 @@ const loginUser = async (req, res) =>
             expiresIn: '7d',
           });
       
-          return res.status(200).json({ token, user: { id: user._id, email: user.email, isAdmin: user.isAdmin } });
+          return res.status(200).json({ token, user: { id: user._id, email: user.email,name:user.name, isAdmin: user.isAdmin } });
         } 
         catch (err) 
         {
