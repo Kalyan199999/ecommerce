@@ -6,11 +6,27 @@ A brief description of what your project does and why it’s useful.
 
 Add a screenshot or GIF to show what the app looks like (can be hosted on Imgur or your repo).
 
-## 🔧 Features
+## 🎯 Core Features
 
-- Feature 1 ✅
-- Feature 2 🚀
-- Feature 3 🔒
+### 🔹 Frontend (React + Tailwind CSS)
+- 🛒 Product listing and product details pages
+- ➕ Add to cart / ➖ Remove from cart functionality
+- 📱 Responsive design (mobile-first with Tailwind CSS)
+- 🔐 Authentication system (Register / Login with protected routes)
+- 💳 Checkout process and order summary page
+- 🧑‍💼 Admin Dashboard to manage:
+  - Products
+  - Orders
+  - Users
+
+### 🔹 Backend (Express + MongoDB)
+- ⚙️ RESTful API with full CRUD operations
+- 🔐 Auth routes: register, login, and secure JWT-based authentication
+- 🛍️ Product routes: create, read, update, delete products
+- 📦 Order routes: place orders, view orders, update status
+- 👥 User roles with access control (admin vs customer)
+- 🖼️ Image uploads via Multer for product management
+
 
 ## 🧰 Tech Stack
 
@@ -27,7 +43,7 @@ Add a screenshot or GIF to show what the app looks like (can be hosted on Imgur 
 - **JWT & bcrypt.js** – Authentication and security
 
 ### 🗃️ Database
-- **MongoDB ** – local NoSQL database
+- **MongoDB** – local NoSQL database
 - **Mongoose** – ODM to interact with MongoDB
 
 ### ☁️ Tools
