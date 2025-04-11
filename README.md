@@ -4,7 +4,7 @@ Developed a fully functional, responsive full-stack e-commerce platform with fea
 
 ## 🖼️ Demo
 
-![Live Demo](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRuGp4zF7Sq7XIQtWkAOhMfArlEwN56-vhwRo2MENmRWpv1X7MBKNv91WvnCHfzRQbKpl28l53z5PGUM3ai67VUQw)
+(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRuGp4zF7Sq7XIQtWkAOhMfArlEwN56-vhwRo2MENmRWpv1X7MBKNv91WvnCHfzRQbKpl28l53z5PGUM3ai67VUQw)
 
 ## 🎯 Core Features
 
