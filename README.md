@@ -50,6 +50,23 @@ Add a screenshot or GIF to show what the app looks like (can be hosted on Imgur 
 - **Thunder Clien** – API testing
 - **Git & GitHub** – Version control
 
+## 📁 Folder Structure 
+
+### 🖥️ Frontend (`/client`)
+/components
+/pages
+/hooks
+/context
+
+
+### 🌐 Backend (`/server`)
+/controllers
+/models
+/routes
+/middleware
+/config
+
+
 
 ## 📦 Installation
 
