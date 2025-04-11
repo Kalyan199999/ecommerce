@@ -1,6 +1,6 @@
 # 🚀 Ecommerce full stack
 
-A brief description of what your project does and why it’s useful.
+Developed a fully functional, responsive full-stack e-commerce platform with features for both users and administrators.
 
 ## 🖼️ Demo
 
