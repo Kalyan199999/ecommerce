@@ -12,11 +12,28 @@ Add a screenshot or GIF to show what the app looks like (can be hosted on Imgur 
 - Feature 2 🚀
 - Feature 3 🔒
 
-## 🛠️ Tech Stack
+## 🧰 Tech Stack
 
-**Frontend:** React, Tailwind  
-**Backend:** Node.js, Express  
-**Database:** MongoDB
+### 🖥️ Frontend
+- **React.js** – Component-based UI
+- **Tailwind CSS** – Utility-first CSS for rapid styling
+- **Axios** – For HTTP requests
+- **React Router DOM** – Client-side routing
+
+### 🌐 Backend
+- **Node.js** – JavaScript runtime
+- **Express.js** – Web framework for APIs
+- **Multer** – For handling file uploads (e.g. product images)
+- **JWT & bcrypt.js** – Authentication and security
+
+### 🗃️ Database
+- **MongoDB ** – local NoSQL database
+- **Mongoose** – ODM to interact with MongoDB
+
+### ☁️ Tools
+- **Thunder Clien** – API testing
+- **Git & GitHub** – Version control
+
 
 ## 📦 Installation
 
