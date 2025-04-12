@@ -30,6 +30,8 @@ const Navbar = () => {
                     isAdmin ? 
 
                     <>
+                      <Link to="/admin-products" className="text-blue-600 hover:underline font-medium">My Products</Link>
+                      
                       <Link to="/add-product" className="text-blue-500 hover:underline font-medium">Add Product</Link>
                      
                       <Link to="/admin" className="text-blue-600 hover:underline font-medium">Dashboard</Link>

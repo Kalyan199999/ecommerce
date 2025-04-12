@@ -2,18 +2,18 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
-import { useAuth } from '../context/AuthContext';
 
 const Home = () => {
-  const [products, setProducts] = useState([]);
 
-  const {user} = useAuth();
-  
+  const [products, setProducts] = useState([]);
 
   const getAllProducts = async () => {
     try {
       const res = await axios.get('http://localhost:5000/api/products');
       setProducts(res.data.products);
+
+      console.log(res.data.products);
+      
       
     } catch (error) {
       console.error('Failed to fetch products:', error);
@@ -65,24 +65,15 @@ const Home = () => {
                 >
                   View
                 </Link>
-
-                {
-                  user?.user.isAdmin &&
-                  <Link
-                  to={`/update-product/${product._id}`}
-                  className="text-sm bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded"
-                >
-                  update
-                </Link>}
               
               </div>
             
             </div>
           ))}
 
-          {products.length === 0 && (
+          {/* {products.length === 0 && (
             <p className="text-center col-span-full text-gray-600">No products available yet.</p>
-          )}
+          )} */}
 
         </div>
 

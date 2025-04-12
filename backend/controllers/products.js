@@ -58,6 +58,22 @@ const getProductById = async (req, res) => {
   }
 };
 
+// GET all the admin products
+const getAdminProducts = async (req, res) => {
+  
+  try {
+    const adminId = req.params.adminId;
+
+    const admin = await User.findById(adminId);
+    const products = await Product.find({ createdBy: admin._id });
+
+    res.status(201).json({ message: 'Admin products fetched successfully', products });
+  } catch (error) {
+    res.status(500).json({ message: 'Error fetching admin products' });
+  }
+};
+
+
 const updateProduct = async (req, res) => {
   try {
     
@@ -109,5 +125,6 @@ module.exports = {
     getProducts, 
     getProductById, 
     deleteProduct,
-    updateProduct
+    updateProduct,
+    getAdminProducts
 }

@@ -13,6 +13,7 @@ import Register from './pages/Register';
 import AddProduct from './pages/AddProduct'
 import ProductDetails from './pages/ProductDetails';
 import UpdateProduct from './pages/UpdateProduct'
+import AdminProducts from './pages/AdminProducts'
 
 function App() {
   return (
@@ -26,17 +27,21 @@ function App() {
 
         <Route path="/" element={<Home />} />
 
-        <Route path="/admin" element={<Dashboard />} />
-
         <Route path="/login" element={<Login />} />
 
         <Route path="/register" element={<Register />} />
-        
-        <Route path="/orders" element={<h1>Orders</h1>} />
+
+        <Route path="/admin" element={<Dashboard />} />
+
+        <Route path="/admin-products" element={<AdminProducts />} />    
 
         <Route path="/add-product" element={<AddProduct />} />
 
         <Route path="/update-product/:id" element={<UpdateProduct />} />
+
+        <Route path="/delete/:id" element={<h1 className='text-red-500 text-3xl font-bold'>Delete</h1>} />
+        
+        <Route path="/orders" element={<h1>Orders</h1>} />
 
         <Route path="/product/:id" element={<ProductDetails />} />
 
