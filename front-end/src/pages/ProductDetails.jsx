@@ -2,6 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import Slider from 'react-slick';
+import { useCart } from '../context/CartContext'; // adjust path as needed
+import { toast } from 'react-toastify';
+import { Link } from 'react-router-dom';
+
 
 const NextArrow = (props) => {
     const { onClick } = props;
@@ -36,7 +40,9 @@ const ProductDetails = () => {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
+  const { addToCart } = useCart();
 
+  
   useEffect(() => {
     const fetchProduct = async () => {
       try {
@@ -51,6 +57,12 @@ const ProductDetails = () => {
 
     fetchProduct();
   }, [id]);
+
+  const handleCart = (title)=>{
+    addToCart(product);
+    toast.success(`${title} added to cart`);
+
+  }
 
   if (loading) return <div className="text-center py-10 text-lg">Loading...</div>;
   if (!product) return <div className="text-center py-10 text-red-500">Product not found.</div>;
@@ -90,9 +102,17 @@ const ProductDetails = () => {
             <p><span className="font-semibold">Category:</span> {product.category}</p>
             <p><span className="font-semibold">Stock:</span> {product.stock}</p>
             <p className="text-2xl font-semibold text-blue-700">${product.price}</p>
-            <button className="mt-4 px-6 py-3 bg-blue-600 text-white rounded hover:bg-blue-700 transition">
-              Add to Cart
-            </button>
+
+            <Link to='/mycart'> 
+              <button
+                onClick={() => handleCart(product.title)}
+                className="mt-4 px-6 py-3 bg-blue-600 text-white rounded hover:bg-blue-700 transition">
+                Add to Cart
+              </button>
+            </Link>
+
+
+
           </div>
   
         </div>

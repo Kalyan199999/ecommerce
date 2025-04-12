@@ -3,8 +3,10 @@
 Developed a fully functional, responsive full-stack e-commerce platform with features for both users and administrators.
 
 ## 🖼️ Demo
-
-![Homepage](./screenshots/screen_shot_1.PNG)
+**Home Page**
+![Homepage](./screenshots/screen_shot_2.PNG)
+**My Cart page**
+![MyCart](./screenshots/screen_shot_3.PNG)
 
 ## 🎯 Core Features
 

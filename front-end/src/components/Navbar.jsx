@@ -2,7 +2,12 @@ import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 
+import { useCart } from '../context/CartContext';
+
+
+
 const Navbar = () => {
+  const { cartItems } = useCart();
 
   const navigate = useNavigate();
   const { user, logout } = useAuth();
@@ -47,6 +52,18 @@ const Navbar = () => {
                       <Link to="/" className="text-blue-500 hover:underline font-medium">Home</Link>
 
                       <Link to="/orders" className="text-blue-600 hover:underline font-medium">My Orders</Link>
+
+                      <Link to="/mycart" className="text-blue-600 hover:underline font-medium">My Cart</Link>
+
+                      {/* <Link to="/cart" className="relative text-3xl">
+                          🛒
+                          <i class='bx bxs-cart'></i>
+                          {cartItems.length > 0 && (
+                            <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center">
+                              {cartItems.length}
+                            </span>
+                          )}
+                      </Link> */}
 
                       <span className="text-gray-700 font-medium">Hi, {user.user.name}</span>
 
