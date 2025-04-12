@@ -2,8 +2,13 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
+import { useAuth } from '../context/AuthContext';
+
 const Home = () => {
   const [products, setProducts] = useState([]);
+
+  const {user} = useAuth();
+  
 
   const getAllProducts = async () => {
     try {
@@ -52,7 +57,7 @@ const Home = () => {
 
               <div className="mt-4 flex justify-between items-center">
                 
-                <span className="text-blue-600 font-bold text-lg">${product.price}</span>
+                <span className="text-blue-600 font-bold text-lg">₹.{product.price}</span>
                 
                 <Link
                   to={`/product/${product._id}`}
@@ -60,6 +65,15 @@ const Home = () => {
                 >
                   View
                 </Link>
+
+                {
+                  user?.user.isAdmin &&
+                  <Link
+                  to={`/update-product/${product._id}`}
+                  className="text-sm bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded"
+                >
+                  update
+                </Link>}
               
               </div>
             

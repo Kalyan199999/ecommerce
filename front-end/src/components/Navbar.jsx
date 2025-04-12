@@ -7,6 +7,8 @@ const Navbar = () => {
   const navigate = useNavigate();
   const { user, logout } = useAuth();
 
+  const isAdmin = user ? user.user.isAdmin : false;
+
   const handleLogout = () => {
     logout()
     navigate('/login');
@@ -22,34 +24,45 @@ const Navbar = () => {
       
       <div className="space-x-4">
         {
-            user ? (
+            user ? 
                 <>
-                  <Link to="/" className="text-blue-500 hover:underline font-medium">Home</Link>
-
                   {
-                    user.user.isAdmin && <Link to="/add-product" className="text-blue-500 hover:underline font-medium">Add Product</Link>
-                  }
+                    isAdmin ? 
 
-                  <Link to="/orders" className="text-blue-600 hover:underline font-medium">My Orders</Link>
-            
-                  <span className="text-gray-700 font-medium">Hi, {user.user.name}</span>
-            
-                  <button
-                    onClick={handleLogout}
-                    className="bg-red-500 text-white px-4 py-1 rounded hover:bg-red-600"
-                  >
-                    Logout
-                  </button>
+                    <>
+                      <Link to="/add-product" className="text-blue-500 hover:underline font-medium">Add Product</Link>
+                     
+                      <Link to="/admin" className="text-blue-600 hover:underline font-medium">Dashboard</Link>
+                      
+                      <span className="text-gray-700 font-medium">Hi, {user.user.name}</span>
+                      
+                      <button onClick={handleLogout} className="bg-red-500 text-white px-4 py-1 rounded hover:bg-red-600">Logout
+                      </button>
+
+                    </> 
+                    : 
+                    <>
+                      <Link to="/" className="text-blue-500 hover:underline font-medium">Home</Link>
+
+                      <Link to="/orders" className="text-blue-600 hover:underline font-medium">My Orders</Link>
+
+                      <span className="text-gray-700 font-medium">Hi, {user.user.name}</span>
+
+                      <button onClick={handleLogout} className="bg-red-500 text-white px-4 py-1 rounded hover:bg-red-600">Logout
+                      </button>
+                    </>
+                  }
                 </>
-            ) : 
-            (
+                 : 
+            
                 <div className="space-x-4">
-                  <Link to="/" className="text-orange-500 hover:underline font-medium">Home</Link>
+                  {/* <Link to="/" className="text-orange-500 hover:underline font-medium">Home</Link> */}
                   <Link to="/login" className="text-blue-600 hover:underline font-medium">Login</Link>
                   <Link to="/register" className="text-green-600 hover:underline font-medium">Register</Link>
                 </div>
-            )
+            
           }
+          
       </div>
     </nav>
 

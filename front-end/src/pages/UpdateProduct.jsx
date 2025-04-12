@@ -1,26 +1,45 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { useAuth } from '../context/AuthContext';
 import { toast } from 'react-toastify';
 
-import { useAuth } from '../context/AuthContext';
-
 const obj = {
-  name: '',
-  description: '',
-  price: 0,
-  category: '',
-  stock: 0
-}
+    title: '',
+    description: '',
+    price: '',
+    category: '',
+    stock: ''
+  }
 
-const AddProduct = () => {
+const UpdateProduct = () => {
 
-   const {user} = useAuth();
+  const { id } = useParams();
 
-  //  console.log(user);
+  const navigate = useNavigate();
+
+  const { user } = useAuth();
+
+//   console.log(user);
 
   const [product, setProduct] = useState(obj);
 
   const [images, setImages] = useState([]);
+
+  useEffect(() => {
+    const fetchProduct = async () => {
+      try {
+        const res = await axios.get(`http://localhost:5000/api/products/${id}`);
+        setProduct(res.data);
+
+        console.log(res.data);
+        
+      } catch (err) {
+        toast.error('Failed to fetch product details');
+      }
+    };
+    fetchProduct();
+  }, [id]);
 
   const handleChange = (e) => {
     setProduct({ ...product, [e.target.name]: e.target.value });
@@ -33,51 +52,40 @@ const AddProduct = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    let formData = new FormData();
-  formData.append('title', product.name);
-  formData.append('description', product.description);
-  formData.append('price', product.price);
-  formData.append('category', product.category);
-  formData.append('stock', product.stock);
-  formData.append('adminId', user.user.id); // assuming this is admin ID
+    const formData = new FormData();
+    formData.append('title', product.title);
+    formData.append('description', product.description);
+    formData.append('price', product.price);
+    formData.append('category', product.category);
+    formData.append('stock', product.stock);
 
-  for (let i = 0; i < images.length; i++) {
-    formData.append('images', images[i]); //  name must be 'images'
-  }
-
-
-    console.log(formData);
-    
-
-    try {
-      const response = await axios.post('http://localhost:5000/api/products/post', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-          'authorization':user.token
-        }
-      });
-
-      console.log(response);
-      
-      toast.success('Product added successfully!');
-      setProduct(obj);
-      setImages([]);
-
-    } catch (error) {
-      toast.error('Failed to add product');
+    for (let i = 0; i < images.length; i++) {
+      formData.append('images', images[i]);
     }
 
+    try {
+      await axios.put(`http://localhost:5000/api/products/${id}`, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          'authorization': user.token
+        }
+      });
+      toast.success('Product updated successfully!');
+      navigate('/');
+    } catch (err) {
+      toast.error('Failed to update product');
+    }
   };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-tr from-blue-50 via-white to-blue-100 px-4">
       <div className="w-full max-w-2xl bg-white shadow-2xl rounded-xl p-8">
-        <h2 className="text-3xl font-bold text-center text-blue-700 mb-6">Add New Product</h2>
+        <h2 className="text-3xl font-bold text-center text-blue-700 mb-6">Update Product</h2>
         <form onSubmit={handleSubmit} className="space-y-5">
           <input
             type="text"
             name="name"
-            value={product.name}
+            value={product.title}
             onChange={handleChange}
             placeholder="Product Name"
             required
@@ -137,7 +145,7 @@ const AddProduct = () => {
             type="submit"
             className="w-full bg-blue-600 hover:bg-blue-700 transition duration-300 text-white font-semibold py-3 rounded-lg shadow-md"
           >
-            Add Product
+            Update Product
           </button>
         </form>
       </div>
@@ -145,4 +153,4 @@ const AddProduct = () => {
   );
 };
 
-export default AddProduct;
+export default UpdateProduct;

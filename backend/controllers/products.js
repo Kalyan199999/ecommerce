@@ -47,7 +47,9 @@ const getProductById = async (req, res) => {
   try 
   {
     const product = await Product.findById(req.params.id);
+
     if (!product) return res.status(404).json({ msg: 'Product not found' });
+
     return res.json(product);
   } 
   catch (err) 
@@ -55,6 +57,40 @@ const getProductById = async (req, res) => {
     return res.status(500).json({ error: err.message });
   }
 };
+
+const updateProduct = async (req, res) => {
+  try {
+    
+    const { title, description, price, category, stock } = req.body;
+    const imagePaths = req.files.map(file => file);
+
+    const updatedFields = {
+      title,
+      description,
+      price,
+      category,
+      stock,
+    };
+
+    if (imagePaths.length > 0) {
+      updatedFields.images = imagePaths;
+    }
+
+    const updatedProduct = await Product.findByIdAndUpdate(
+      req.params.id,
+      { $set: updatedFields },
+      { new: true }
+    );
+
+    if (!updatedProduct) return res.status(404).json({ msg: 'Product not found' });
+
+    res.status(200).json({ msg: 'Product updated successfully' });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Failed to update product' });
+  }
+};
+
 
 const deleteProduct = async (req, res) => {
   try 
@@ -72,5 +108,6 @@ module.exports = {
     addNewProduct,
     getProducts, 
     getProductById, 
-    deleteProduct
+    deleteProduct,
+    updateProduct
 }
