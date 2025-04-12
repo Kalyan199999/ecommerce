@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import Slider from 'react-slick';
+import { sliderSettings } from './SliderSettings'
 
 
 const Home = () => {
@@ -42,14 +44,20 @@ const Home = () => {
               className="bg-white rounded-xl shadow-lg p-5 hover:shadow-2xl transition-all"
             >
               
-              {
-              product.images && product.images.length > 0 && (
-                <img
-                  src={`http://localhost:5000/${product.images[0].path}`}
-                  alt={product.title}
-                  className="w-full h-48 object-contain rounded-md mb-4 bg-gray-100"
-                />
-              )}
+
+              <Slider {...sliderSettings}>
+                {
+                  product.images.map((img, index) => (
+                    <div key={index} className="flex items-center justify-center">
+                      <img
+                        src={`http://localhost:5000/uploads/products/${img.filename}`}
+                        alt={`product-${index}`}
+                        className="w-full h-48 object-contain rounded-md mb-4 bg-gray-100"
+                      />
+                    </div>
+                  ))
+                }
+              </Slider>
 
               <h2 className="text-xl font-semibold text-gray-800">{product.title}</h2>
               

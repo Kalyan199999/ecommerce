@@ -5,36 +5,8 @@ import Slider from 'react-slick';
 import { useCart } from '../context/CartContext'; // adjust path as needed
 import { toast } from 'react-toastify';
 import { Link } from 'react-router-dom';
+import { sliderSettings } from './SliderSettings'
 
-
-const NextArrow = (props) => {
-    const { onClick } = props;
-    return (
-      <div
-        onClick={onClick}
-        className="absolute right-2 top-1/2 transform -translate-y-1/2 z-10 cursor-pointer bg-white p-2 rounded-full shadow hover:bg-blue-100"
-      >
-        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
-        </svg>
-      </div>
-    );
-  };
-  
-  const PrevArrow = (props) => {
-    const { onClick } = props;
-    return (
-      <div
-        onClick={onClick}
-        className="absolute left-2 top-1/2 transform -translate-y-1/2 z-10 cursor-pointer bg-white p-2 rounded-full shadow hover:bg-blue-100"
-      >
-        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7" />
-        </svg>
-      </div>
-    );
-  };
-  
 
 const ProductDetails = () => {
   const { id } = useParams();
@@ -67,15 +39,7 @@ const ProductDetails = () => {
   if (loading) return <div className="text-center py-10 text-lg">Loading...</div>;
   if (!product) return <div className="text-center py-10 text-red-500">Product not found.</div>;
 
-  const sliderSettings = {
-    dots: false,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    nextArrow: <NextArrow />,
-    prevArrow: <PrevArrow />
-  };
+
   
   return (
     <div className="min-h-screen bg-gradient-to-br from-white via-blue-50 to-blue-100 p-6 flex items-center justify-center">

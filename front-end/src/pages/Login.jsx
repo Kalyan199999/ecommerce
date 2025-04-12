@@ -23,9 +23,10 @@ const Login = () => {
       const res = await axios.post('http://localhost:5000/api/auth/login', form);
 
       login(res.data);
+      const user = res.data.user
 
-      toast.success('Logged in successfully!');
-
+      user.isAdmin ? toast.success('Logged in as Admin is successfully!') : toast.success('Logged in as User is successfully!') 
+      
       navigate('/');
     } 
     catch (err) 
