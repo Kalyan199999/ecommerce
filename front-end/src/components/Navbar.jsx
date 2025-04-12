@@ -7,7 +7,7 @@ import { useCart } from '../context/CartContext';
 
 
 const Navbar = () => {
-  const { cartItems } = useCart();
+  const { cartItems , clearCartLocalStorage} = useCart();
 
   const navigate = useNavigate();
   const { user, logout } = useAuth();
@@ -16,6 +16,7 @@ const Navbar = () => {
 
   const handleLogout = () => {
     logout()
+    clearCartLocalStorage()
     navigate('/login');
   };
 
