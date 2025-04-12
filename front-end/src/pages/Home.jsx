@@ -57,7 +57,7 @@ const Home = () => {
 
               <div className="mt-4 flex justify-between items-center">
                 
-                <span className="text-blue-600 font-bold text-lg">₹.{product.price}</span>
+                <span className="text-blue-600 font-bold text-lg">${product.price}</span>
                 
                 <Link
                   to={`/product/${product._id}`}
