@@ -4,11 +4,7 @@ Developed a fully functional, responsive full-stack e-commerce platform with fea
 
 ## 🖼️ Demo
 
-<<<<<<< HEAD
-![Live Demo]screen_shot_1.PNG
-=======
-![Homepage Screenshot](.screen_shot_1.png)
->>>>>>> 0259e27 (updated product details and Home page)
+![Live Demo](./screen_shot_1.PNG)
 
 ## 🎯 Core Features
 
