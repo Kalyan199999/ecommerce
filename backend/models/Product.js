@@ -11,9 +11,16 @@ const productSchema = new mongoose.Schema(
         category: { type: String },
 
         images: [{
-            originalName: { type: String },
-            fileName : { type: String },
+            fieldname:{type:String},
+
+            originalname: { type: String },
+            
+            filename : { type: String },
+
+            destination:{type:String},
+
             path: { type: String },
+
             createdAt: { type: Date, default: Date.now }
 
         }], 

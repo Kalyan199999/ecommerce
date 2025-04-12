@@ -1,6 +1,8 @@
 import React from 'react';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
@@ -9,6 +11,7 @@ import Navbar from './components/Navbar';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import AddProduct from './pages/AddProduct'
+import ProductDetails from './pages/ProductDetails';
 
 function App() {
   return (
@@ -31,6 +34,8 @@ function App() {
         <Route path="/orders" element={<h1>Orders</h1>} />
 
         <Route path="/add-product" element={<AddProduct />} />
+
+        <Route path="/product/:id" element={<ProductDetails />} />
 
         <Route path="/*" element={<h1 className='text-center text-red-500 text-3xl font-bold'>Error</h1>} />
         

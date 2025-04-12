@@ -1,11 +1,17 @@
 const Product = require('../models/Product');
+const User = require('../models/User')
 
 const addNewProduct =  async (req, res) => {
+  
   try 
   {
-    const { title, description, price, category, stock, createdBy } = req.body;
+    const { title, description, price, category, stock, adminId } = req.body;
     const imagePaths = req.files.map(file => file); // or `file.path` for full paths
 
+    const user = await User.findById(adminId);
+
+    const createdBy = user._id
+    
     const product = new Product({
       title,
       description,
@@ -17,7 +23,8 @@ const addNewProduct =  async (req, res) => {
     });
 
     await product.save();
-    return res.status(201).json(product);
+
+    return res.status(201).json({message: 'Product created successfully', product });
   } 
   catch (err) {
     console.error(err);

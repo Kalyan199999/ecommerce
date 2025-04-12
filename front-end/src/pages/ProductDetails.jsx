@@ -1,0 +1,105 @@
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import axios from 'axios';
+import Slider from 'react-slick';
+
+const NextArrow = (props) => {
+    const { onClick } = props;
+    return (
+      <div
+        onClick={onClick}
+        className="absolute right-2 top-1/2 transform -translate-y-1/2 z-10 cursor-pointer bg-white p-2 rounded-full shadow hover:bg-blue-100"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
+        </svg>
+      </div>
+    );
+  };
+  
+  const PrevArrow = (props) => {
+    const { onClick } = props;
+    return (
+      <div
+        onClick={onClick}
+        className="absolute left-2 top-1/2 transform -translate-y-1/2 z-10 cursor-pointer bg-white p-2 rounded-full shadow hover:bg-blue-100"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7" />
+        </svg>
+      </div>
+    );
+  };
+  
+
+const ProductDetails = () => {
+  const { id } = useParams();
+  const [product, setProduct] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchProduct = async () => {
+      try {
+        const res = await axios.get(`http://localhost:5000/api/products/${id}`);
+        setProduct(res.data);
+      } catch (err) {
+        console.error('Failed to load product:', err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProduct();
+  }, [id]);
+
+  if (loading) return <div className="text-center py-10 text-lg">Loading...</div>;
+  if (!product) return <div className="text-center py-10 text-red-500">Product not found.</div>;
+
+  const sliderSettings = {
+    dots: false,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    nextArrow: <NextArrow />,
+    prevArrow: <PrevArrow />
+  };
+  
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-white via-blue-50 to-blue-100 p-6 flex items-center justify-center">
+      <div className="max-w-4xl w-full bg-white shadow-xl rounded-xl overflow-hidden">
+        <div className="md:flex">
+          
+          <div className="md:w-1/2 bg-gray-100 p-4 relative">
+            <Slider {...sliderSettings}>
+              {product.images.map((img, index) => (
+                <div key={index} className="flex items-center justify-center">
+                  <img
+                    src={`http://localhost:5000/uploads/products/${img.filename}`}
+                    alt={`product-${index}`}
+                    className="max-h-96 object-contain w-full"
+                  />
+                </div>
+              ))}
+            </Slider>
+          </div>
+  
+          <div className="md:w-1/2 p-8 space-y-4">
+            <h2 className="text-3xl font-bold text-gray-800">{product.title}</h2>
+            <p className="text-gray-600">{product.description}</p>
+            <p><span className="font-semibold">Category:</span> {product.category}</p>
+            <p><span className="font-semibold">Stock:</span> {product.stock}</p>
+            <p className="text-2xl font-semibold text-blue-700">${product.price}</p>
+            <button className="mt-4 px-6 py-3 bg-blue-600 text-white rounded hover:bg-blue-700 transition">
+              Add to Cart
+            </button>
+          </div>
+  
+        </div>
+      </div>
+    </div>
+  );
+  
+};
+
+export default ProductDetails;

@@ -4,19 +4,22 @@ import { toast } from 'react-toastify';
 
 import { useAuth } from '../context/AuthContext';
 
+const obj = {
+  name: '',
+  description: '',
+  price: 0,
+  category: '',
+  stock: 0
+}
+
 const AddProduct = () => {
 
    const {user} = useAuth();
 
-   console.log(user);
+  //  console.log(user);
 
-  const [product, setProduct] = useState({
-    name: '',
-    description: '',
-    price: '',
-    category: '',
-    stock: ''
-  });
+  const [product, setProduct] = useState(obj);
+
   const [images, setImages] = useState([]);
 
   const handleChange = (e) => {
@@ -25,48 +28,44 @@ const AddProduct = () => {
 
   const handleFileChange = (e) => {
     setImages(e.target.files);
-
-    // console.log(e.target.files);
-    
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    let formData = new Object();
+    let formData = new FormData();
+  formData.append('title', product.name);
+  formData.append('description', product.description);
+  formData.append('price', product.price);
+  formData.append('category', product.category);
+  formData.append('stock', product.stock);
+  formData.append('adminId', user.user.id); // assuming this is admin ID
 
-    formData.title = product.name;
+  for (let i = 0; i < images.length; i++) {
+    formData.append('images', images[i]); //  name must be 'images'
+  }
 
-    formData.description =  product.description;
-
-    formData.price =  product.price;
-
-    formData.category =  product.category;
-
-    formData.stock =  product.stock;
-    formData.adminId = user.user.id
-
-    formData.images = []
-
-    for (let i = 0; i < images.length; i++) {
-      formData.images = images[i];
-    }
 
     console.log(formData);
     
 
-    // try {
-    //   await axios.post('http://localhost:5000/api/products', formData, {
-    //     headers: {
-    //       'Content-Type': 'multipart/form-data'
-    //     }
-    //   });
-    //   toast.success('Product added successfully!');
-    //   setProduct({ name: '', description: '', price: '', category: '', stock: '' });
-    //   setImages([]);
-    // } catch (error) {
-    //   toast.error('Failed to add product');
-    // }
+    try {
+      const response = await axios.post('http://localhost:5000/api/products/post', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          'authorization':user.token
+        }
+      });
+
+      console.log(response);
+      
+      toast.success('Product added successfully!');
+      setProduct(obj);
+      setImages([]);
+
+    } catch (error) {
+      toast.error('Failed to add product');
+    }
 
   };
 

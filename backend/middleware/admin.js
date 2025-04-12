@@ -14,6 +14,8 @@ const verifyAdmin = (req, res, next) =>
     
           req.user = decoded;
           next();
+          // console.log("got the access!");
+          
         } 
         catch (err) 
         {
