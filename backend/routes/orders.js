@@ -9,9 +9,9 @@ const { createOrder,getUserOrders,getAdminOrders } = require('../controllers/ord
 router.post('/', userAuth, createOrder);
 
 // get the user orders
-router.get('/user/:id', userAuth, getUserOrders);
+router.get('/user/:userid', userAuth, getUserOrders);
 
 // get all the orders
-router.get('/', verifyAdmin, getAdminOrders);
+router.get('/admin/:adminId', verifyAdmin, getAdminOrders);
 
 module.exports = router;

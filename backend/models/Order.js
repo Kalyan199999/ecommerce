@@ -27,7 +27,7 @@ const orderSchema = new mongoose.Schema(
         },
         adminId: {
           type: mongoose.Schema.Types.ObjectId,
-          ref: 'User', // assuming admins are in the User model
+          ref: 'User', // admins are in the User model
           required: true,
         }
       },
@@ -48,6 +48,11 @@ const orderSchema = new mongoose.Schema(
       type: String,
       enum: ['Cash on Delivery', 'Online Payment'],
       default: 'Cash on Delivery',
+    },
+    
+    orderData:{
+      type: Date,
+      default: Date.now,
     },
     
     paymentStatus: { type: String, default: 'Unpaid' }, // Paid, Unpaid

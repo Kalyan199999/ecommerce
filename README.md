@@ -11,6 +11,8 @@ Developed a fully functional, responsive full-stack e-commerce platform with fea
 ![MyCart](./screenshots/screen_shot_5.PNG)
 **Admin Products page**
 ![MyCart](./screenshots/screen_shot_4.PNG)
+**Admin Orders received page**
+![MyCart](./screenshots/screen_shot_6.PNG)
 
 ## 🎯 Core Features
 

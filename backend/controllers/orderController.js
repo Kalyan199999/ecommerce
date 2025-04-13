@@ -80,15 +80,51 @@ const getUserOrders = async (req, res) => {
 };
 
 
-
 const getAdminOrders = async (req, res) => {
   try {
-    const orders = await Order.find().populate('user').populate('products.product');
-    res.json(orders);
+    const adminId = req.params.adminId;
+
+    const orders = await Order.find({ 'products.adminId': adminId });
+
+    const filteredOrders = await Promise.all(
+      orders.map(async (order) => {
+        const adminProducts = await Promise.all(
+          order.products
+            .filter(p => p.adminId.toString() === adminId)
+            .map(async (p) => {
+              const product = await Product.findById(p.productId);
+
+              return {
+                title: product?.title || 'Unknown',
+                category: product?.category || 'Unknown',
+                quantity: p.quantity,
+                price: p.price,
+              };
+            })
+        );
+
+        return {
+          _id: order._id,
+          userId: order.userId,
+          totalAmount: order.totalAmount,
+          shippingAddress: order.shippingAddress,
+          paymentMethod: order.paymentMethod,
+          paymentStatus: order.paymentStatus,
+          status: order.status,
+          createdAt: order.createdAt,
+          products: adminProducts,
+        };
+      })
+    );
+
+    res.status(200).json({ message: 'Success', orders: filteredOrders });
   } catch (err) {
-    res.status(500).json({ error: 'Failed to fetch all orders' });
+    console.error(err);
+    res.status(500).json({ error: 'Failed to fetch admin orders' });
   }
 };
+
+
 
 
 module.exports = { 
