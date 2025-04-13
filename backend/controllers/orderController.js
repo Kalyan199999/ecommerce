@@ -81,7 +81,7 @@ const getUserOrders = async (req, res) => {
 
 
 
-const getAllOrders = async (req, res) => {
+const getAdminOrders = async (req, res) => {
   try {
     const orders = await Order.find().populate('user').populate('products.product');
     res.json(orders);
@@ -94,5 +94,5 @@ const getAllOrders = async (req, res) => {
 module.exports = { 
     createOrder, 
     getUserOrders, 
-    getAllOrders 
+    getAdminOrders 
 };

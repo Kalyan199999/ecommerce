@@ -3,7 +3,7 @@ const router = express.Router();
 const { verifyAdmin ,userAuth} = require('../middleware/admin');
 
 
-const { createOrder,getUserOrders,getAllOrders } = require('../controllers/orderController');
+const { createOrder,getUserOrders,getAdminOrders } = require('../controllers/orderController');
 
 // craete the new order for user
 router.post('/', userAuth, createOrder);
@@ -12,6 +12,6 @@ router.post('/', userAuth, createOrder);
 router.get('/user/:id', userAuth, getUserOrders);
 
 // get all the orders
-router.get('/', userAuth,verifyAdmin, getAllOrders);
+router.get('/', verifyAdmin, getAdminOrders);
 
 module.exports = router;
