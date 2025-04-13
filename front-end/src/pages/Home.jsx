@@ -14,7 +14,7 @@ const Home = () => {
       const res = await axios.get('http://localhost:5000/api/products');
       setProducts(res.data.products);
 
-      console.log(res.data.products);
+      // console.log(res.data.products);
       
       
     } catch (error) {
