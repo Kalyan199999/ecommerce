@@ -55,7 +55,7 @@ Developed a fully functional, responsive full-stack e-commerce platform with fea
 - **Mongoose** – ODM to interact with MongoDB
 
 ### ☁️ Tools
-- **Thunder Clien** – API testing
+- **Thunder Client** – API testing
 - **Git & GitHub** – Version control
 
 ## 📁 Folder Structure 
