@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useAuth } from '../context/AuthContext';
+import { toast } from 'react-toastify';
 
 const AdminOrders = () => {
   const { user } = useAuth();
@@ -16,8 +17,11 @@ const AdminOrders = () => {
         });
 
         setOrders(res.data.orders);
-      } catch (err) {
+        toast.success('Orders loaded successfully!');
+      } 
+      catch (err) {
         console.error('Failed to fetch admin orders', err);
+        toast.error('Failed to fetch orders');
       }
     };
 

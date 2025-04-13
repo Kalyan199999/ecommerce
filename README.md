@@ -74,7 +74,11 @@ Developed a fully functional, responsive full-stack e-commerce platform with fea
 - **/middleware**
 - **/config**
 
+## packages for frontend
+**npm install react-router-dom react-toastify react-slick slick-carousel axios**
 
+## packages for backend
+**npm install nodemon express cors dotenv mongoose bcrypt jwt multer**
 
 ## 📦 Installation
 
@@ -83,3 +87,4 @@ git clone https://github.com/yourusername/yourrepo.git
 cd yourrepo
 npm install
 npm start
+
